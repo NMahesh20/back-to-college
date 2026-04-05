@@ -1,0 +1,83 @@
+SEQUENCE {
+  # envelopedData
+  OBJECT_IDENTIFIER { 1.2.840.113549.1.7.3 }
+  [0] {
+    SEQUENCE {
+      INTEGER { 0 }
+      SET {
+        SEQUENCE {
+          INTEGER { 0 }
+          SEQUENCE {
+            SEQUENCE {
+              SET {
+                SEQUENCE {
+                  # countryName
+                  OBJECT_IDENTIFIER { 2.5.4.6 }
+                  PrintableString { "DE" }
+                }
+              }
+              SET {
+                SEQUENCE {
+                  # stateOrProvinceName
+                  OBJECT_IDENTIFIER { 2.5.4.8 }
+                  UTF8String { "NRW" }
+                }
+              }
+              SET {
+                SEQUENCE {
+                  # localityName
+                  OBJECT_IDENTIFIER { 2.5.4.7 }
+                  UTF8String { "Bochum" }
+                }
+              }
+              SET {
+                SEQUENCE {
+                  # organizationName
+                  OBJECT_IDENTIFIER { 2.5.4.10 }
+                  UTF8String { "RUB" }
+                }
+              }
+              SET {
+                SEQUENCE {
+                  # organizationUnitName
+                  OBJECT_IDENTIFIER { 2.5.4.11 }
+                  UTF8String { "NDS" }
+                }
+              }
+              SET {
+                SEQUENCE {
+                  # commonName
+                  OBJECT_IDENTIFIER { 2.5.4.3 }
+                  UTF8String { "Recipient" }
+                }
+              }
+              SET {
+                SEQUENCE {
+                  # emailAddress
+                  OBJECT_IDENTIFIER { 1.2.840.113549.1.9.1 }
+                  IA5String { "efail.rub@mail.de" }
+                }
+              }
+            }
+            INTEGER { `0db7099bfcc8ab320d1a02fc5e920d590d3e1391` }
+          }
+          SEQUENCE {
+            # rsaEncryption
+            OBJECT_IDENTIFIER { 1.2.840.113549.1.1.1 }
+          }
+          OCTET_STRING { `217da1e2de9f21429fd6a58fe28cd9cf0bae60b52645dab08614571fbffd0e20b40be1f9743adae8cf4d9afeb61c367b5cd18f796097457e486a2d5455a4ae6dc422805a278f061a91f24a51b769618848e601092dbbf40d6f609bcb18569473ce9e189c5f60f6696d8a7d4b7ebdd1acab564b74123bcc59d52db917ba649d2a09e02fee591717f9731b8e9b6edf732c453162efdefd1fd10effbdf48355059e5aff71edcc1fca4fe34265d02f9ee27703a1a07f33ebaa51db9882420ebfe094ab094b479f51b8a91efc20cdb5db2f0e2217e6301e2cea32cac4b65e175c70649351643d70180534e57ed619be85c003bb98b69cdd7484530349644953b4ad67` }
+        }
+      }
+      SEQUENCE {
+        # data
+        OBJECT_IDENTIFIER { 1.2.840.113549.1.7.1 }
+        SEQUENCE {
+          # AES-256-CBC
+          OBJECT_IDENTIFIER { 2.16.840.1.101.3.4.1.42 }
+          OCTET_STRING { `cca05fc8b122a5dba3bb464a1c24a6f7` }
+        }
+        [0 PRIMITIVE] { `95572c420c412c4da223ce0ce83103fbd23313302665311409b6cb8b51e81b3d2c6a0ae2787a74c7943b85f1f8b7c173b26ac971fa519b65c5fd3687cf6f328b912028229d067032927a27f5f88abc195466c2a7a53df52237273822c374d3429f6f04bdc92d3f925f58311206d12948eb484b3f218cbf67345d74495cb9f284f8a94d864d09d7a92ef13b5fe40f9bfd1c3f26552d4c3de30e9746b3bead7061f8cecf9822455d85a34fa040fae6295500c0e9391df08761398a22542e0b6e7eb5a3411ddbc3ce72c89dabfa093981f446491d688b8728a2ffe0c818a955dd35d5798197b68b22fb76534135204e5b6874b42a4e694a3869d764a6950d9660dbc471f918ea1e5abd9892b829bd64678a825d3d890ad9098ce464305f417c9f37d596b0df7b3da212062965e7d32ebdb0` }
+      }
+    }
+  }
+}

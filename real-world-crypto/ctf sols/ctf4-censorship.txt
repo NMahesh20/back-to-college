@@ -1,0 +1,14 @@
+Q:
+You find yourself a citizen of Blue City. Recently, the King has restricted access to the color red and utilizes his monopoly of the network to prevent any access to it. Luckily, you recently learned how to circumvent censorship measures. Use that knowledge to gain access to red and your flag!
+
+Sol:
+
+We need to access http://c-censor_tcp_frag-0.rwc.cs.uni-paderborn.de:12345/red.html
+
+Git clone: https://github.com/UPB-SysSec/DPYProxy
+
+Setup proxy and run: python3 main.py --port 4433 --tcp_frag --frag_size 5
+
+Now access via curl: curl -p -x localhost:4433 c-censor_tcp_frag-0.rwc.cs.uni-paderborn.de:12345/red.html
+
+rwc{fr4gm3nt4ti0n_is_s0_c00l_ee26b0dd4af7}

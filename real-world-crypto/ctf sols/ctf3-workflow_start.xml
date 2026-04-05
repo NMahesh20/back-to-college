@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+Q:
+You have received access to a server which contains a known backdoor. You have learned from a backdoor description that the server will send you the secret flag in an application message if it receives a carefully selected set of messages in the TLS RSA key exchange:
+
+    The ClientHello message has to contain at least 5 extensions
+    before sending ChangeCipherSpec, two Alerts have to be sent by the client
+    the first encrypted message is a Heartbeat message
+After receiving the server Finished message, you can activate the backdoor by further sending ClientHello message followed by an Application message (with the text containing your name).
+Sol:
+    TLS RSA Key Exchange Workflow with Alerts and Heartbeat
+
+    Build tls attacker:
+    git clone https://github.com/tls-attacker/TLS-Attacker.git
+    cd TLS-Attacker
+    mvn clean install -DskipTests=true
+
+    Execute:
+    java -jar apps/TLS-Client.jar -connect c-tlsattacker-0.rwc.cs.uni-paderborn.de:10005 -workflow_input ctf3-workflow_start.xml -workflow_output workflow_result.xml -keylogfile 'key.txt' -debug
+    java -jar apps/TLS-Client.jar -connect c-tlsattacker-0.rwc.cs.uni-paderborn.de:12345 -workflow_input ctf3-workflow_start.xml -workflow_output workflow_result.xml -keylogfile 'key.txt' -debug
+    For flag check the last "<completeResultingMessage>" in workflow_result.xml and read from hex to ascii.
+-->
+<workflowTrace xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <!-- Initial TLS Handshake -->
+    <Send>
+        <configuredMessages>
+
+            <ClientHello>
+                <extensions>
+                    <ServerNameIndicationExtension/>
+                    <ECPointFormat/>
+                    <EllipticCurves/>
+                    <SignatureAndHashAlgorithmsExtension/>
+                    <EncryptedClientHelloExtension/>
+                </extensions>
+            </ClientHello>
+        </configuredMessages>
+    </Send>
+
+    <Receive>
+        <expectedMessages>
+            <ServerHello/>
+            <Certificate/>
+            <ServerHelloDone/>
+        </expectedMessages>
+    </Receive>
+
+    <SendDynamicClientKeyExchange/>
+
+    <!-- Two Alerts before ChangeCipherSpec: explicitly set null-level and null-description
+    <Send>
+        <configuredMessages>
+            <Alert>
+                <level xsi:nil="true"/>
+                <description xsi:nil="true"/>
+            </Alert>
+            <Alert>
+                <level xsi:nil="true"/>
+                <description xsi:nil="true"/>
+            </Alert>
+        </configuredMessages>
+    </Send>
+
+    <!-- ChangeCipherSpec, then Heartbeat (first encrypted), then Finished -->
+    <Send>
+        <configuredMessages>
+            <ChangeCipherSpec/>
+            <Heartbeat>
+                <payload>48656C6C6F</payload>
+            </Heartbeat>
+            <Finished/>
+        </configuredMessages>
+    </Send>
+
+    <Receive>
+        <expectedMessages>
+            <ChangeCipherSpec/>
+            <Finished/>
+        </expectedMessages>
+    </Receive> -->
+
+    <!-- Activate decryption so subsequent Application messages are shown plaintext -->
+    <ActivateDecryption/>
+
+    <!-- Backdoor activation: send another ClientHello then Application with name "mahesh" -->
+    <Send>
+        <configuredMessages>
+            <ClientHello>
+                <extensions>
+                    <ServerNameIndicationExtension/>
+                    <ECPointFormat/>
+                    <EllipticCurves/>
+                    <SignatureAndHashAlgorithmsExtension/>
+                    <GreaseExtension/>
+                </extensions>
+            </ClientHello>
+        </configuredMessages>
+    </Send>
+
+    <Send>
+        <configuredMessages>
+            <Application>
+                <dataConfig>67696F72676974</dataConfig> <!-- "mahesh" in hex -->
+            </Application>
+        </configuredMessages>
+    </Send>
+
+    <!-- Expect application response (flag) -->
+    <Receive>
+        <expectedMessages>
+            <Application/>
+        </expectedMessages>
+    </Receive>
+</workflowTrace>

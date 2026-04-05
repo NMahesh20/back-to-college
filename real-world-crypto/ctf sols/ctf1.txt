@@ -1,0 +1,16 @@
+Q:
+Sign a message with a certificate that is valid for catpictures.com, there is no alternative! You can request certificates from the server with the token 7454fc025f550e476b7b09038927b2252d9a597495abf65732e6c8087a16a37b. However, the server will only accept requests for dogpictures.com.
+
+Can you trick the server?
+
+Sol:
+openssl req -new -newkey rsa:4096 -nodes \
+  -keyout yourdomain.key -out yourdomain.csr \
+  -subj "/C=US/ST=California/L=San Francisco/O=Example Corp/OU=mahesh/CN=dogpictures.com" \
+  -addext "subjectAltName = DNS:catpictures.com"
+
+sign the 9512441
+
+echo -n "9512441" | openssl dgst -sha256 -sign <yourdomain.key> | openssl base64 -A
+
+rwc{cl4551c_C47_d0g_du4l17y_50266e2f601a}

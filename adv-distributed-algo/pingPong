@@ -1,0 +1,46 @@
+Node{
+   node nextNode;
+   node previousNode;
+   init(){
+      nextNode = null;
+      previousNode = null;
+   }
+   /* the current node joins previous node, and first node doesn't join */
+   join(node S){
+      previousNode=S;
+      S -> updateNextNode(this);
+   }
+   updateNextNode(node N){
+      nextNode = N;
+   }
+
+   goToNext(int rounds){
+      output("Ping");   /* Print Ping on going to next node */
+      /* when triggering from remote then these variables are of remote's local */
+      if(nextNode != null){
+         nextNode -> goToNext(rounds);
+      }
+      else if(nextNode == null & rounds > 1){
+         previousNode -> goToPrevious(rounds - 1);
+      }
+   }
+   goToPrevious(int rounds){
+      output("Pong");
+      if(previousNode != null){
+         previousNode -> goToPrevious(rounds);
+      }
+      
+      else if(previousNode == null & rounds > 1){
+         nextNode -> goToNext(rounds - 1);
+      }
+   }
+
+   output(string M){
+      print(M);
+   }
+   startPingPong(int rounds){
+      if (previousNode == null) this -> goToNext(rounds);  /* Start from the first node */
+      else output("Its not the head node. Start from the head node.");                   
+   }
+   
+}
